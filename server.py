@@ -1,3 +1,7 @@
+"""
+Este archivo implementa un servidor Flask para analizar emociones en un texto.
+Emplea un servicio de predicción de emociones para generar la emoción más destacada de un texto.
+"""
 from flask import Flask, render_template, request
 from EmotionDetection.emotion_detection import emotion_detector
 
@@ -5,6 +9,11 @@ app = Flask("Emotions Analyzer")
 
 @app.route("/emotionDetector")
 def sent_analyzer():
+    """
+    Esta función recibe un texto a través de un sitio web, emplea el módulo de deteción de emcoiones
+    para procesarlo, y devuelve una cadena con las emociones detectadas 
+    junto con la emoción dominante.
+    """
     text_to_analyze = request.args.get("textToAnalyze")
     response = emotion_detector(text_to_analyze)
 
@@ -31,6 +40,9 @@ def sent_analyzer():
 
 @app.route("/")
 def render_index_page():
+    """
+    Esta función muestra la página inicial.
+    """
     return render_template("index.html")
 
 if __name__ == "__main__":
